@@ -138,11 +138,13 @@ function compareSchedulers(tasks) {
         dsea: {
             activePEs: dseaResult.activePEs,
             totalUtil: dseaResult.totalUtil,
-            elapsed: dseaResult.elapsed
+            elapsed: dseaResult.elapsed,
+            migrationDelay: Math.max(0, dseaResult.activePEs - 1) * 2 // 2ms delay per McNaughton wrap-around migration
         },
         sedf: {
             activePEs: sedfResult.activePEs,
-            totalUtil: sedfResult.totalUtil
+            totalUtil: sedfResult.totalUtil,
+            migrationDelay: 0 // sEDF bins tasks permanently, so no migrations
         },
         peDifference: sedfResult.activePEs - dseaResult.activePEs,
         peRatio: sedfResult.activePEs / dseaResult.activePEs

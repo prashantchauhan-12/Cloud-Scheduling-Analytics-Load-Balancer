@@ -26,7 +26,7 @@
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
             <div class="glass-panel p-6">
                 <h3 class="text-lg text-slate-300 font-semibold mb-2">Active Tasks</h3>
                 <div id="active-tasks" class="stat-value">0</div>
@@ -41,6 +41,11 @@
                 <h3 class="text-lg text-slate-300 font-semibold mb-2">PE Savings (DSEA vs sEDF)</h3>
                 <div id="pe-savings" class="stat-value text-green-400">0%</div>
                 <p class="text-sm text-slate-400 mt-2">Resource efficiency gain</p>
+            </div>
+            <div class="glass-panel p-6">
+                <h3 class="text-lg text-slate-300 font-semibold mb-2">Est. Migration Delay</h3>
+                <div id="migration-delay" class="stat-value text-yellow-400">0ms</div>
+                <p class="text-sm text-slate-400 mt-2">DSEA task splitting cost</p>
             </div>
         </div>
 
@@ -144,6 +149,8 @@
             
             const savings = ((data.scheduling.sedf.activePEs - data.scheduling.dsea.activePEs) / Math.max(1, data.scheduling.sedf.activePEs)) * 100;
             document.getElementById('pe-savings').innerText = `${savings.toFixed(1)}%`;
+            
+            document.getElementById('migration-delay').innerText = `${data.scheduling.dsea.migrationDelay}ms`;
 
             // Update generators
             const now = Date.now();
